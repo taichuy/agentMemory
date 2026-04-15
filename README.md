@@ -186,9 +186,10 @@
 
 ## 鸣谢
 
-感谢 [Linux.do](https://linux.do/) 社区支持。
+Thanks,
+LINUX DO Moderators
 
-特别感谢L社区各位佬们分享学习经验和笔记，受益匪浅
+感谢 [Linux.do](https://linux.do/) 社区支持。特别感谢L社区各位佬们分享学习经验和笔记，受益匪浅
 
 ---
 

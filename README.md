@@ -6,6 +6,29 @@
 
 这个仓库默认只保留规则文件和模板文件，不附带任何具体项目示例，目的就是避免新项目初始化时把旧案例误当成通用记忆继续沿用。
 
+## 一键安装 `.memory`
+
+把仓库里的 `.memory/` 直接安装到当前目录：
+
+PowerShell（Windows）：
+
+```powershell
+irm https://raw.githubusercontent.com/taichuy/agentMemory/main/install.ps1 | iex
+```
+
+Shell（macOS / Linux）：
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/taichuy/agentMemory/main/install.sh | sh
+```
+
+如果当前目录已经存在 `.memory/`，脚本默认会停止，避免误覆盖。
+
+- PowerShell 强制覆盖：
+  `& ([scriptblock]::Create((irm https://raw.githubusercontent.com/taichuy/agentMemory/main/install.ps1))) -Force`
+- Shell 强制覆盖：
+  `curl -fsSL https://raw.githubusercontent.com/taichuy/agentMemory/main/install.sh | sh -s -- --force`
+
 ## 适用场景
 
 在项目开发过程中，团队通常需要一个专门的记忆管理目录，用来沉淀“代码之外、但又会持续影响决策”的信息。`agentMemory` 适合以下场景：
@@ -185,9 +208,6 @@
 从这个角度看，`agentMemory` 本质上是一个“面向 AI 协作开发的记忆管理模板仓库”。
 
 ## 鸣谢
-
-Thanks,
-LINUX DO Moderators
 
 感谢 [Linux.do](https://linux.do/) 社区支持。特别感谢L社区各位佬们分享学习经验和笔记，受益匪浅
 

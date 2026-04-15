@@ -183,3 +183,40 @@
 - `todolist/template.md`：待确认事项模板。
 
 从这个角度看，`agentMemory` 本质上是一个“面向 AI 协作开发的记忆管理模板仓库”。
+
+## 鸣谢
+
+感谢 [Linux.do](https://linux.do/) 社区支持。
+
+
+---
+
+## License
+
+This project is licensed under [Apache-2.0](LICENSE).
+
+---
+
+## Contributors
+
+<p align="center">
+  <a href="https://github.com/taichuy/agentMemory/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=taichuy/agentMemory&max=50" alt="Contributors" />
+  </a>
+</p>
+
+## Star History
+
+<p align="center">
+  <a href="https://www.star-history.com/#iOfficeAI/aionui&Date" target="_blank">
+    <img src="https://api.star-history.com/svg?repos=taichuy/agentMemory&type=Date" alt="Star History" width="600">
+  </a>
+</p>
+
+<div align="center">
+
+**If you like it, give us a star**
+
+[Report Bug](https://github.com/taichuy/agentMemory/issues) · [Request Feature](https://github.com/taichuy/agentMemory/issues)
+
+</div>

@@ -1,0 +1,129 @@
+# 背景
+
+`.memory` 是项目内的 Agent 协作记忆目录，用来记录可复用的约定、边界、阶段事实和故障经验。
+
+这个仓库是模板仓库，目录内所有入口文件都应保持“可直接填写”的模板状态；初始化新项目时，应优先基于模板补齐内容，而不是让大模型临时猜结构。
+
+所有日期统一使用绝对时间格式：`yyyy-mm-dd hh`。
+
+## 模板使用规则
+
+1. 新增记忆前，先查看对应目录下是否已有模板文件。
+2. 能基于模板填写的，不要自由发挥结构。
+3. 同一类记忆的字段命名、标题层级和时间格式应保持一致。
+4. 若模板已经不能覆盖真实需求，应先更新模板，再新增记忆。
+5. 模板的目标是降低歧义和检索噪声，不是增加书写负担。
+
+## 检索规则
+
+1. 固定先读 `.memory/AGENTS.md`。
+2. 固定再读 `.memory/user-memory.md`。
+3. 对 `feedback-memory`、`project-memory`、`reference-memory`、`tool-memory`，第一轮只读取每个文件前 30 行的 `YAML front matter`。
+4. 单轮最多扫描 200 个记忆文件。
+5. 单轮只展开与当前任务最相关的最多 5 条有效记忆全文。
+6. 有效记忆选择原则固定为：宁缺毋滥，只选有用的，可少选，不凑满 5 条。
+7. 是否直接参考某条记忆，不只看时间，还要结合记忆类型、`decision_policy` 与当前任务相关性判断。
+8. `project-memory` 超过两天后，仅在其确实影响当前决策时，才回到当前代码、当前文档或当前运行结果验证。
+9. `reference-memory` 只作为索引，不直接作为结论来源。
+10. `tool-memory` 只在当前任务会用到对应工具或该工具刚刚失败时参与检索。
+
+## 存什么
+
+记忆的目标不是做用户画像，而是帮助 Agent 在后续任务中更快、更准地复用已有结论。
+
+### 用户记忆
+
+记录用户是谁、技术背景、工作习惯、知识水平和沟通偏好。
+
+固定入口：`.memory/user-memory.md`
+
+### 反馈记忆
+
+当用户给出指正或最终同意后，应整理成可复用的反馈记忆。
+
+反馈记忆应遵守以下规则：
+
+1. 每一条都包含：规则、原因、适用场景。
+2. 既记录纠正，也记录肯定，避免 Agent 越来越保守。
+3. 按 `interaction/` 和 `repository/` 两类分目录维护。
+4. 在 `YAML front matter` 中必须显式写 `feedback_category`。
+5. 使用模板文件创建，避免字段漂移。
+6. `decision_policy` 默认使用 `direct_reference`。
+
+### 项目记忆
+
+记录项目当前正在发生的事情、阶段共识和短期事实，这类记忆衰减较快。
+
+项目记忆正文至少回答：
+
+1. 谁在做什么？
+2. 为什么这样做？
+3. 为什么要做？
+4. 截止日期？
+5. 决策背后动机？
+
+项目记忆使用 `YAML front matter` 作为摘要层，`decision_policy` 默认使用 `verify_before_decision`。
+
+### 引用记忆
+
+这里只记录“去哪里看什么”的入口索引，不记录正文结论。
+
+引用记忆按 `source-reference.md`、`api-reference.md`、`script-reference.md` 等分类模板维护，`decision_policy` 默认使用 `index_only`。
+
+### 工具记忆
+
+`tool-memory` 专门记录项目环境中已经真实发生过的工具失败案例与已验证解法。
+
+边界如下：
+
+1. 只记录真实失败过的问题。
+2. 只记录已验证可复用的解法。
+3. 不写通用工具使用文档。
+4. 不写未来风险提示。
+5. 同一工具、同一问题、同一处理办法复现时，直接追加到原文件。
+
+工具记忆使用 `YAML front matter` 作为摘要层，`decision_policy` 默认使用 `reference_on_failure`。
+
+### 待确认事项
+
+`todolist/` 用于存放 Agent 自主推进时暂时无法拍板的问题。
+
+1. 这里只放待确认事项，不放正式记忆。
+2. 用户确认并处理完成后，文件应删除，不做长期沉淀。
+3. 也应优先使用目录中的模板，确保待确认信息完整。
+
+## 不存什么
+
+过多无关记忆会显著增加检索噪声，以下内容不应放入记忆中：
+
+1. 可直接从当前代码中读取的代码模式、架构和路径。
+2. 版本管理历史，优先回看 `git`。
+3. 不能复用的一次性调试过程或一次性修复流水账。
+4. 配置文件中已经明确声明的内容。
+5. 临时性任务细节。
+6. 与记忆目录无关的运行摘要、草稿或历史杂项文件。
+
+## 目录索引
+
+- `.memory/user-memory.md`
+  - 用户记忆固定入口模板。
+- `.memory/feedback-memory/template.md`
+  - 反馈记忆通用模板。
+- `.memory/feedback-memory/interaction/template.md`
+  - 交互类反馈模板。
+- `.memory/feedback-memory/repository/template.md`
+  - 仓库工程类反馈模板。
+- `.memory/project-memory/template.md`
+  - 项目记忆模板。
+- `.memory/reference-memory/template.md`
+  - 引用记忆通用模板。
+- `.memory/reference-memory/source-reference.md`
+  - 源码参考模板。
+- `.memory/reference-memory/api-reference.md`
+  - API 参考模板。
+- `.memory/reference-memory/script-reference.md`
+  - 脚本参考模板。
+- `.memory/tool-memory/template.md`
+  - 工具记忆模板。
+- `.memory/todolist/template.md`
+  - 待确认事项模板。

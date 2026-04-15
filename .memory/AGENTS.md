@@ -106,24 +106,23 @@
 ## 目录索引
 
 - `.memory/user-memory.md`
-  - 用户记忆固定入口模板。
-- `.memory/feedback-memory/template.md`
-  - 反馈记忆通用模板。
-- `.memory/feedback-memory/interaction/template.md`
-  - 交互类反馈模板。
-- `.memory/feedback-memory/repository/template.md`
-  - 仓库工程类反馈模板。
-- `.memory/project-memory/template.md`
-  - 项目记忆模板。
-- `.memory/reference-memory/template.md`
-  - 引用记忆通用模板。
-- `.memory/reference-memory/source-reference.md`
-  - 源码参考模板。
-- `.memory/reference-memory/api-reference.md`
-  - API 参考模板。
-- `.memory/reference-memory/script-reference.md`
-  - 脚本参考模板。
-- `.memory/tool-memory/template.md`
-  - 工具记忆模板。
-- `.memory/todolist/template.md`
-  - 待确认事项模板。
+  - 用户记忆主文件，固定入口。
+- `.memory/feedback-memory/`
+  - 反馈记忆根目录，存放模板与分类子目录。
+- `.memory/feedback-memory/interaction/`
+  - 用户沟通、执行流程、记忆检索等交互类纠正。
+- `.memory/feedback-memory/repository/`
+  - 仓库结构、目录管理、脚本放置、版本控制等工程类纠正。
+- `.memory/project-memory/`
+  - 项目记忆目录，存放阶段事实、短期共识和模板。
+- `.memory/reference-memory/`
+  - 引用记忆目录，存放入口索引和分类说明。
+- `.memory/tool-memory/`
+  - 工具记忆目录，按工具分目录、按问题建文件，记录真实失败案例与解法。
+- `.memory/todolist/`
+  - AI 自主开发且用户离线时的待确认目录，处理后直接删除，不做沉淀。
+
+## 目录外排除项
+
+以下内容即使仍然保留在仓库中，也不再作为 `.memory` 记忆检索输入：
+1. `.memory/` 根目录下不属于 `AGENTS.md`、`user-memory.md` 和四类记忆目录的其他文件

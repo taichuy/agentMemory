@@ -52,7 +52,8 @@ curl -fsSL https://raw.githubusercontent.com/taichuy/agentMemory/main/install.sh
 建议在根目录的：AGENTS.md，CLAUDE.md，GEMINI.md进行强制指向如：
 ```markdown
 # ai必读
-1.开始之前需要先阅读相关记忆，并且与用户沟通完决策性沟通时候应该主动维护记忆内容，对应记忆请先阅读：`.memory/AGENTS.md`
+@.memory/AGENTS.md
+@.memory/user-memory.md
 
 # 文件管理约定
 1.如果对应子目录下有AGENTS.md，需要先介绍阅读再做处理

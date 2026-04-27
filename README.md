@@ -51,8 +51,10 @@ curl -fsSL https://raw.githubusercontent.com/taichuy/agentMemory/main/install.sh
 ## 使用
 建议在根目录的：AGENTS.md，CLAUDE.md，GEMINI.md进行强制指向如：
 ```markdown
-# ai必读
+# 记忆
+命中对应`记忆存储规则`自动更新对应记忆中
 @.memory/AGENTS.md
+## 用户偏好
 @.memory/user-memory.md
 
 # 文件管理约定
